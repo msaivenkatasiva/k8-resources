@@ -1,0 +1,7 @@
+kind: Nmaespace
+apiVersion: v1
+metadata:
+  name: expense
+  lables:
+    name: expense
+    environment: dev
