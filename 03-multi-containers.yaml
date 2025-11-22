@@ -1,14 +1,14 @@
- kind: Pod
- apiVersion: v1
- metadata: 
+kind: Pod
+apiVersion: v1
+metadata: 
   name: multi-containers
   labels: 
     name: nginx
     environment: dev
-  spec:
-    containers:
-    - name: nginx
-      image: nginx
-    - name: alma
-      image: "almalinux:9"
-      command: "sleep 2000"
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+  - name: alma
+    image: "almalinux:9"
+    command: "sleep 2000"
