@@ -1,4 +1,4 @@
-kind: pod
+kind: Pod
 apiVersion: v1
 metadata:
   name: nginx
@@ -6,5 +6,6 @@ metadata:
     name: expense
     environment: dev
 spec:
+  containers:
   - name: nginx
     image: nginx
