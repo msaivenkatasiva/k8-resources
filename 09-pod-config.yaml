@@ -6,17 +6,17 @@ spec:
   containers:
   - name: nginx
     image: nginx
-      # envFrom:
-      # - ConfigMapRef:
-      #   name: devopswithmsvs
-    env:
-    - name: github
-      valueFrom:
-        configMapKeyRef:
-          name: devopswithmsvs
-          key: github
-    - name: course
-      valueFrom:
-        configMapKeyRef:
-          name: devopswithmsvs
-          key: course
+    envFrom:
+    - ConfigMapRef:
+        name: devopswithmsvs
+    # env:
+    # - name: github
+    #   valueFrom:
+    #     configMapKeyRef:
+    #       name: devopswithmsvs
+    #       key: github
+    # - name: course
+    #   valueFrom:
+    #     configMapKeyRef:
+    #       name: devopswithmsvs
+    #       key: course
