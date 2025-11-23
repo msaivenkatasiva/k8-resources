@@ -12,11 +12,11 @@ spec:
     env:
     - name: name
       valueFrom:
-      configMapkeyRef:
-        name: devopswithmsvs
-        key: name
+        configMapkeyRef:
+          name: devopswithmsvs
+          key: name
     - name: course
       valueFrom:
-      configMapkeyRef:
-        name: devopswithmsvs
-        key: course
+        configMapkeyRef:
+          name: devopswithmsvs
+          key: course
