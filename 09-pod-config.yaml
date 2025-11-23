@@ -4,19 +4,19 @@ metadata:
   name: config-test
 spec:
   containers:
-    - name: nginx
-      image: nginx
+  - name: nginx
+    image: nginx
       # envFrom:
       # - ConfigMapRef:
       #   name: devopswithmsvs
-      env:
-      - name: name
-        valueFrom:
-        configMapkeyRef:
-          name: devopswithmsvs
-          key: name
-      - name: course
-        valueFrom:
-        configMapkeyRef:
-          name: devopswithmsvs
-          key: course
+    env:
+    - name: name
+      valueFrom:
+      configMapkeyRef:
+        name: devopswithmsvs
+        key: name
+    - name: course
+      valueFrom:
+      configMapkeyRef:
+        name: devopswithmsvs
+        key: course
