@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: devopswithmsvs
+data:
+  name: sai venkata siva
+  course: kubernetes
+  github: https://github.com/msaivenkatasiva/
