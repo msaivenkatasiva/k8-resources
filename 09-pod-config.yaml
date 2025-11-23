@@ -1,0 +1,22 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: config-test
+spec:
+  containers:
+    - name: nginx
+      image: nginx
+      # envFrom:
+      # - ConfigMapRef:
+      #   name: devopswithmsvs
+      env:
+      - name: name
+        valueFrom:
+        configMapRef:
+          name: devopswithmsvs
+          key: name
+      - name: course
+        valueFrom:
+        configMapRef:
+          name: devopswithmsvs
+          key: course
