@@ -7,7 +7,7 @@ spec:
   - name: nginx
     image: nginx
     envFrom:
-    - ConfigMapRef:
+    - ConfigMapKeyRef:
         name: devopswithmsvs
     # env:
     # - name: github
