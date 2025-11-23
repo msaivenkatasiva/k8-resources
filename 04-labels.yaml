@@ -5,7 +5,7 @@ metadata:
   labels:
     name: k8
     trainer: sivakumar
-specs:
+spec:
   containers:
     - name: nginx
       image: nginx
