@@ -10,11 +10,11 @@ spec:
       # - ConfigMapRef:
       #   name: devopswithmsvs
     env:
-    - name: name
+    - name: github
       valueFrom:
         configMapkeyRef:
           name: devopswithmsvs
-          key: name
+          key: github
     - name: course
       valueFrom:
         configMapkeyRef:
