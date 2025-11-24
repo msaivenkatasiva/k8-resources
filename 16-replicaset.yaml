@@ -1,5 +1,5 @@
-kind: ReplicaSet
 apiVersion: apps/v1
+kind: ReplicaSet
 metadata:
   name: nginx
   labels:
