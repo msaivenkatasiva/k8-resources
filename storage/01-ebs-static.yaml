@@ -28,7 +28,7 @@ spec:
 apiVersion: v1
 kind: Pod
 metadata:
-  name:
+  name: ebs-static
   labels:
     purpose: ebs-static
     project: expense
@@ -44,8 +44,8 @@ volumes:
   persistentVolumeClaim:
   claimName: ebs-static
 ---
-apiVersion: v1
 Kind: Service
+apiVersion: v1
 metadata:
   name: nginx-lb
 spec:
