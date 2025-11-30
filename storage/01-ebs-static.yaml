@@ -36,15 +36,15 @@ spec:
   containers:
   - name: nginx
     image: nginx
-  volumeMounts:
+    volumeMounts:
+    - name: persistent-storage
+      mountPath: /usr/share/nginx/html
+  volumes:
   - name: persistent-storage
-    mountPath: /usr/share/nginx/html
-volumes:
-- name: persistent-storage
-  persistentVolumeClaim:
-  claimName: ebs-static
+    persistentVolumeClaim:
+      claimName: ebs-static
 ---
-Kind: Service
+kind: Service
 apiVersion: v1
 metadata:
   name: nginx-lb
