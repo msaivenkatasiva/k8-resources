@@ -26,12 +26,13 @@ spec:
   resources:
     requests:
       storage: 5Gi
-
 ---
 apiVersion: v1
 kind: Pod
 metadata:
   name: efs-app
+  labels:
+    purpose: efs-static
 spec:
   containers:
   - name: app
@@ -43,3 +44,16 @@ spec:
   - name: persistent-storage
     persistentVolumeClaim:
       claimName: efs-static-claim
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: efs-static
+spec:
+  type: LoadBalancer
+  selector:
+    purpose: efs-static
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
