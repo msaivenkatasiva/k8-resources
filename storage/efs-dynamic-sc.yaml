@@ -8,33 +8,3 @@ parameters:
   fileSystemId: fs-04602fe594949e6f9
   directoryPerms: "700"
   basePath: "/expense"
----
-apiVersion: v1
-kind: Pod
-metadata:
-  name: efs-dynamic
-  labels:
-    purpose: efs-dynamic
-spec:
-  containers:
-    - name: nginx
-      image: nginx
-      volumeMounts:
-        - name: persistent-storage
-          mountPath: /usr/share/nginx/html
-  volumes:
-    - name: persistent-storage
-      persistentVolumeClaim:
-        claimName: efs-dynamic
----
-apiVersion: v1
-kind: Service
-metadata:
-  name: efs-dynamic
-spec:
-  selector:
-    purpose: efs-dynamic
-  ports:
-  - protocol: TCP
-    port: 80 #service-port
-    targetPort: 80
