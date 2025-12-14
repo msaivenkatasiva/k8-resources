@@ -31,8 +31,8 @@ metadata:
 spec:
   selector:
     app: nginx
-    tier: web
-    project: test-project
+    tier: frontend
+    project: expense
   ports:
   - protocol: TCP
     port: 80 #service-port
