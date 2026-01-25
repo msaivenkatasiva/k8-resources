@@ -8,7 +8,7 @@ spec:
   containers:
   - name: nginx
     image: nginx
-    imagePullPolicy: always #keep it always anytime
+    imagePullPolicy: Always #keep it always anytime
   tolerations:
   - key: "project"
     operator: "Equal"
