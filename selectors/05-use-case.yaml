@@ -1,0 +1,152 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: redis-cache
+spec:
+  selector:
+    matchLabels:
+      app: store
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: store
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: redis-server
+        image: redis:3.2-alpine
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: web-server
+spec:
+  selector:
+    matchLabels:
+      app: web-store
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: web-store
+    spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - web-store
+            topologyKey: "kubernetes.io/hostname"
+        podAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - store
+            topologyKey: "kubernetes.io/hostname"
+      containers:
+      - name: web-app
+        image: nginx:1.16-alpine
+
+# this is the affinity and antiaffinity but these two are not sufficient in production level. there is a need of service which connects both.
+
+---
+# below code is the final part which attaches the pod and redis by creating service and attaching it to redis. So, that redis can listen to pod
+
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: redis-cache
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: store
+#   template:
+#     metadata:
+#       labels:
+#         app: store
+#     spec:
+#       affinity:
+#         podAntiAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#               - key: app
+#                 operator: In
+#                 values:
+#                 - store
+#             topologyKey: kubernetes.io/hostname
+#       containers:
+#       - name: redis-server
+#         image: redis:3.2-alpine
+#         ports:
+#         - containerPort: 6379
+# ---
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: redis
+# spec:
+#   selector:
+#     app: store
+#   ports:
+#   - port: 6379
+#     targetPort: 6379
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: web-server
+# spec:
+#   replicas: 2
+#   selector:
+#     matchLabels:
+#       app: web-store
+#   template:
+#     metadata:
+#       labels:
+#         app: web-store
+#     spec:
+#       affinity:
+#         podAntiAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#               - key: app
+#                 operator: In
+#                 values:
+#                 - web-store
+#             topologyKey: kubernetes.io/hostname
+#         podAffinity:
+#           requiredDuringSchedulingIgnoredDuringExecution:
+#           - labelSelector:
+#               matchExpressions:
+#               - key: app
+#                 operator: In
+#                 values:
+#                 - store
+#             topologyKey: kubernetes.io/hostname
+#       containers:
+#       - name: web-app
+#         image: nginx:1.16-alpine
+#         env:
+#         - name: REDIS_HOST
+#           value: redis
+#         - name: REDIS_PORT
+#           value: "6379"
