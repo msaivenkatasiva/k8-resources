@@ -10,10 +10,7 @@ curl -O https://s3.us-west-2.amazonaws.com/amazon-eks/1.34.2/2025-11-13/bin/linu
 chmod +x ./kubectl
 sudo mv kubectl /usr/local/bin/
 
-#installing kubens
-sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
-sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
-sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
+
 
 #mounting extra volume
 lsblk
@@ -42,3 +39,8 @@ echo -e "$R Logout and Login again $N"
 curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-4
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+#installing kubens
+sudo git clone https://github.com/ahmetb/kubectx /opt/kubectx
+sudo ln -s /opt/kubectx/kubens /usr/local/bin/kubens
+sudo ln -s /opt/kubectx/kubectx /usr/local/bin/kubectx
